@@ -9,7 +9,7 @@ let    // Paso 1: Fuente de datos original
     // Paso 3: Estandarizar la columna categoria a Title Case
     // para unificar "computación", "COMPUTACIÓN" y "Computación"
 
-    EstandarizarCategoria = Table.TransformColumns(Origen, {{"categoria", Text.Proper, type text}}),
+    EstandarizarCategoria = Table.TransformColumns(LimpiarEspacios, {{"categoria", Text.Proper, type text}}),
 
     // Paso 4: Filtrar y eliminar registros de prueba
     // Excluir filas donde categoria sea exactamente "Prueba"
@@ -26,6 +26,7 @@ let    // Paso 1: Fuente de datos original
     TiparColumnas = Table.TransformColumnTypes(EliminarPruebas, {
     {"id_venta", Int64.Type},
     {"nombre_producto", type text},
+    {"categoria", type text},
     {"precio", type number},
     {"fecha_venta", type date}
     })
